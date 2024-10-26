@@ -1,12 +1,31 @@
 from pathlib import Path
 import subprocess
+import os
 
 ROOT = Path(__file__).parent
 
+input_path = ROOT/ 'input'
 acbtomp3 = ROOT / 'libraris' / 'acbtomp3.py'
 
-mode = input(   "1.将awb转成mp3" + 
-                "\n请选择功能：")
+while True:
+    os.system('cls')
+    
+    for filename in os.listdir(input_path):
+        if filename.endswith('.awb'):
+            awbfound = ".awb✅"
+            break
+        else:
+            awbfound = ".awb❌"
 
-if mode == '1':
-    subprocess.run(['python', str(acbtomp3)], check=True)
+    found = awbfound
+    
+    mode = input(f"{found}" + 
+                "\n1.将awb转成mp3" + 
+                "\nq.退出" + 
+                "\n请选择功能：")
+    
+    if mode == '1':
+        subprocess.run(['python', str(acbtomp3)], check=True)
+        
+    elif mode == 'q':
+        exit()
