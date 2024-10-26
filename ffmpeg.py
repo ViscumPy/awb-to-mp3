@@ -20,6 +20,7 @@ while True:
     found = awbfound
     
     mode = input(f"{found}" + 
+                "\n--------------------------------" +
                 "\n1.将awb转成mp3" + 
                 "\nq.退出" + 
                 "\n请选择功能：")
