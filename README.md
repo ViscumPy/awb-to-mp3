@@ -2,6 +2,12 @@
 
 只是为了打astrodx有更好的体验才出现的东西
 
+## 前置
+
+```bash
+pip install -r requirements.txt
+```
+
 ## 使用方法
 
 - **awb转mp3**: 将`awb`丢入`input`，双击`启动.bat`，选择模式
