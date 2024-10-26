@@ -14,6 +14,7 @@ pip install -r requirements.txt
 
 ## 其他说明
 - **python版本**: 3.9
+- **NET版本**: 8.0
 
 ## 未来的大饼
 
