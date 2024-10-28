@@ -38,7 +38,8 @@ def decrypt_to_wav(input_file, output_wav, key):
 def wav_to_mp3(output_wav, output_mp3):
     try:
         sound = AudioSegment.from_wav(output_wav)
-        sound.export(output_mp3, format="mp3")
+        # 设置输出采样率为 44100Hz
+        sound.export(output_mp3, format="mp3", parameters=["-ar", "44100"])
         print(f"{output_wav} 转换并保存为 {output_mp3}")
     except Exception as e:
         print("转换为 mp3 过程出错：", e)
