@@ -1,6 +1,6 @@
-input/*.mp4
+input/*.mp3
 input/*.awb
 input/*.acb
-output/*.mp4
+output/*.mp3
 output/*.awb
 output/*.acb
