@@ -15,12 +15,11 @@ if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
 # 步骤1：使用 vgmstream 解密 .awb/.acb 文件为 .wav
-# 步骤1：使用 vgmstream 解密 .awb/.acb 文件为 .wav
 def decrypt_to_wav(input_file, output_wav, key):
     vgmstream_path = ROOT / "vgmstream" / "vgmstream-cli.exe"
     
     # 打印路径以验证
-    print(f"vgmstream_cli.exe 路径: {vgmstream_path}")
+    print(f"vgmstream-cli.exe 路径: {vgmstream_path}")
     
     try:
         subprocess.run([
@@ -33,11 +32,14 @@ def decrypt_to_wav(input_file, output_wav, key):
     except subprocess.CalledProcessError as e:
         print("解密过程出错：", e)
 
-
 # 步骤2：转换 .wav 为 .mp3
 def wav_to_mp3(output_wav, output_mp3):
     try:
         sound = AudioSegment.from_wav(output_wav)
+        
+        # 创建输出 MP3 文件的文件夹
+        os.makedirs(os.path.dirname(output_mp3), exist_ok=True)
+        
         # 设置输出采样率为 44100Hz
         sound.export(output_mp3, format="mp3", parameters=["-ar", "44100"])
         print(f"{output_wav} 转换并保存为 {output_mp3}")
@@ -50,10 +52,10 @@ for filename in os.listdir(input_folder):
         input_file = os.path.join(input_folder, filename)
         
         # 临时 .wav 文件路径
-        output_wav = os.path.join(output_folder, filename + ".wav")
+        output_wav = os.path.join(output_folder, os.path.splitext(filename)[0] + ".wav")
         
         # 最终 .mp3 文件路径
-        output_mp3 = os.path.join(output_folder, os.path.splitext(filename)[0] + ".mp3")
+        output_mp3 = os.path.join(output_folder, os.path.splitext(filename)[0], "track.mp3")
         
         # 运行解密和转换流程
         decrypt_to_wav(input_file, output_wav, key)

@@ -1,6 +1,8 @@
 input/*.mp3
 input/*.awb
 input/*.acb
+input/*
 output/*.mp3
 output/*.awb
 output/*.acb
+output/*
