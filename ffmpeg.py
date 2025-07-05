@@ -19,12 +19,12 @@ while True:
             awbfound = ".awb❌"
         
         if filename.endswith('.acb'):
-            awbfound = ".acb✅"
+            acbfound = ".acb✅"
             break
         else:
-            awbfound = ".acb❌"
+            acbfound = ".acb❌"
 
-    found = awbfound
+    found = f"{awbfound}\n{acbfound}"
     
     mode = input(f"{found}" + 
                 "\n--------------------------------" +
