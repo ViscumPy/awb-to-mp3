@@ -45,22 +45,16 @@ def extract_track(input_file, track_id, output_dir):
                 text=True,
                 check=True
             )
-
-            track_names = []
+            track_name = ""
             for line in meta_result.stdout.split('\n'):
                 if "stream name:" in line:
-                    name_part = line.split(":")[1].strip().strip('"')
-                    track_names.extend([n.strip() for n in name_part.split(";") if n.strip()])
-
-            main_name = track_names[0] if track_names else ""
-
+                    track_name = line.split(":")[1].strip().strip('"')
+                    break
             safe_name = f"{track_id:04d}"
-            if main_name:
-                base_name = main_name.split(";")[0].strip()
-                safe_name += f"_{sanitize_filename(base_name)}"
+            if track_name:
+                safe_name += f"_{sanitize_filename(track_name)}"
             
             output_wav = output_dir / f"{safe_name}.wav"
-            
             subprocess.run(
                 [str(VGMSTREAM_PATH), "-k", KEY, "-s", str(track_id), "-o", str(output_wav), input_file],
                 check=True
@@ -94,7 +88,6 @@ def process_acb_file(input_file):
     success_count = 0
     for track_id in range(total_tracks):
         time.sleep(DELAY_BETWEEN_TRACKS)
-        
         safe_name, wav_path = extract_track(input_file, track_id, output_dir)
         if not wav_path:
             continue
